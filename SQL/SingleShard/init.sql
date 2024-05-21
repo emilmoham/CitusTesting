@@ -3,9 +3,9 @@ create table facilities (
 	name text not null
 );
 
-insert into facilities (name) values ('JasonSite');
+--insert into facilities (name) values ('Site 1');
 
-select * from facilities;
+--select * from facilities;
 
 create table accounts (
 	id serial primary key,
@@ -15,19 +15,19 @@ create table accounts (
 	facility_id int not null references facilities
 );
 
-insert into accounts (name,  number, type, facility_id) values ('assets', 1000, '0', 1);
-insert into accounts (name,  number, type, facility_id) values ('liabilities', 2000, '1', 1);
+--insert into accounts (name,  number, type, facility_id) values ('assets', 1000, '0', 1);
+--insert into accounts (name,  number, type, facility_id) values ('liabilities', 2000, '1', 1);
 
-select * from accounts;
+--select * from accounts;
 
 create table transactions (
 	id bigserial primary key,
 	facility_id int not null references facilities
 );
 
-insert into transactions(facility_id) values (1);
+--insert into transactions(facility_id) values (1);
 
-select * from transactions;
+--select * from transactions;
 
 
 create table entries (
@@ -38,9 +38,9 @@ create table entries (
 	debit int not null
 );
 
-insert into entries (transaction_id, account_id, credit, debit) values (1, 1, 100, 0), (1, 2, 0, 100);
+--insert into entries (transaction_id, account_id, credit, debit) values (1, 1, 100, 0), (1, 2, 0, 100);
 
-select * from entries;
+--select * from entries;
 
 --drop table entries;
 --drop table transactions;

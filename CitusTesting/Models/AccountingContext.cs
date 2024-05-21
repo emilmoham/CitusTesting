@@ -22,7 +22,7 @@ namespace CitusTesting.Models
             var types = modelBuilder.Model.GetEntityTypes().ToList();
 
             // Refer to tables in snake_case internally
-            types.ForEach(e => e.SetTableName(mapper.TranslateMemberName(e.GetTableName() ?? "error1")));
+            types.ForEach(e => e.SetTableName(mapper.TranslateMemberName(e.GetTableName() ?? "error")));
 
             // Refer to columns in snake_case internally
             types.SelectMany(e => e.GetProperties())
