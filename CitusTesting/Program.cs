@@ -1,4 +1,5 @@
 using CitusTesting.Models;
+using CitusTesting.Seeders;
 
 namespace CitusTesting
 {
@@ -14,13 +15,23 @@ namespace CitusTesting
 
             AccountingContext context = new AccountingContext(config);
 
+            IDatabaseSeeder[] seeders = new IDatabaseSeeder[]
+            {
+                new FacilitiesSeeder(),
+                new AccountsSeeder(),
+            };
+
+            foreach (IDatabaseSeeder seeder in seeders)
+            {
+                seeder.Seed(context);
+            }
+
             List<Account> accounts = context.Accounts.ToList();
 
-            foreach(Account account in accounts)
+            foreach (Account account in accounts)
             {
                 Console.WriteLine($"{account.Id} - {account.Name} - {account.Number} - {(account.Type ? "Credit Normal" : "Debit Normal")} - {account.FacilityId}");
             }
-
             Console.ReadKey();
         }
     }

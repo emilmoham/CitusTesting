@@ -31,5 +31,6 @@ namespace CitusTesting.Models
         }
 
         public DbSet<Account> Accounts { get; set; }
+        public DbSet<Facility> Facilities { get; set; }
     }
 }
