@@ -1,48 +1,26 @@
-create table facilities (
-	id serial primary key,
-	name text not null
+CREATE table facilities (
+	id serial PRIMARY KEY,
+	name text NOT NULL
 );
 
---insert into facilities (name) values ('Site 1');
-
---select * from facilities;
-
-create table accounts (
-	id serial primary key,
-	name text not null,
-	number int not null,
-	type bit not null,
-	facility_id int not null references facilities
+CREATE TABLE accounts (
+	id serial PRIMARY KEY,
+	name text NOT NULL,
+	number int NOT NULL,
+	TYPE boolean NOT NULL,
+	facility_id int NOT NULL REFERENCES facilities(id)
 );
 
---insert into accounts (name,  number, type, facility_id) values ('assets', 1000, '0', 1);
---insert into accounts (name,  number, type, facility_id) values ('liabilities', 2000, '1', 1);
-
---select * from accounts;
-
-create table transactions (
-	id bigserial primary key,
-	facility_id int not null references facilities
+CREATE TABLE transactions (
+	id bigserial PRIMARY KEY,
+	facility_id int NOT NULL REFERENCES facilities(id)
 );
 
---insert into transactions(facility_id) values (1);
-
---select * from transactions;
-
-
-create table entries (
-	id bigserial primary key,
-	transaction_id bigint not null references transactions,
-	account_id int not null references accounts,
-	credit int not null,
-	debit int not null
+CREATE TABLE entries (
+	id bigserial PRIMARY KEY,
+	facility_id int NOT NULL REFERENCES facilities(id),
+	transaction_id bigint NOT NULL REFERENCES transactions(id),
+	account_id int NOT NULL REFERENCES accounts(id),
+	credit int NOT NULL,
+	debit int NOT NULL
 );
-
---insert into entries (transaction_id, account_id, credit, debit) values (1, 1, 100, 0), (1, 2, 0, 100);
-
---select * from entries;
-
---drop table entries;
---drop table transactions;
---drop table accounts;
---drop table facilities;
