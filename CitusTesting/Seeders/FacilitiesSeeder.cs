@@ -1,35 +1,25 @@
 ﻿using CitusTesting.Models;
+using CitusTesting.Seeders.Helpers;
 
 namespace CitusTesting.Seeders
 {
     public class FacilitiesSeeder : IDatabaseSeeder
     {
-        private string[] cities =
-        {
-            "Philadelphia",
-            "New York",
-            "Boston",
-            "Washington D.C.",
-            "Phoenix",
-            "Cincinnati",
-            "Scranton",
-            "Cleveland",
-            "Jackson",
-            "Trenton"
-        };
+        private static string[] StandardFacilities = FacilityDefinitions.StandardFacilities;
 
         public override void Seed(AccountingContext context)
         {
+            Console.WriteLine("Seeding Facilities");
             int currentFacilitiesCount = context.Facilities.Count();
-            if (cities.Length == currentFacilitiesCount)
+            if (StandardFacilities.Length == currentFacilitiesCount)
             {
                 Console.WriteLine("Facilities table already seeded");
                 return;
             }
 
-            foreach (string city in cities)
+            foreach (string city in StandardFacilities)
             {
-                Console.WriteLine($"New facility: {city}");
+                //Console.WriteLine($"New facility: {city}");
                 context.Add(new Facility() { Name=city });
             }
             context.SaveChanges();

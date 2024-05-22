@@ -1,5 +1,6 @@
 using CitusTesting.Models;
 using CitusTesting.Seeders;
+using System.Diagnostics;
 
 namespace CitusTesting
 {
@@ -19,20 +20,25 @@ namespace CitusTesting
             {
                 new FacilitiesSeeder(),
                 new AccountsSeeder(),
+                new TransactionSeeder(1000)
             };
 
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
             foreach (IDatabaseSeeder seeder in seeders)
             {
                 seeder.Seed(context);
             }
+            stopwatch.Stop();
 
-            List<Account> accounts = context.Accounts.ToList();
+            Console.WriteLine($"Seeding finished -- {stopwatch.Elapsed}");
 
-            foreach (Account account in accounts)
-            {
-                Console.WriteLine($"{account.Id} - {account.Name} - {account.Number} - {(account.Type ? "Credit Normal" : "Debit Normal")} - {account.FacilityId}");
-            }
-            Console.ReadKey();
+            //List<Account> accounts = context.Accounts.ToList();
+
+            //foreach (Account account in accounts)
+            //{
+            //    Console.WriteLine($"{account.Id} - {account.Name} - {account.Number} - {(account.Type ? "Credit Normal" : "Debit Normal")} - {account.FacilityId}");
+            //}
         }
     }
 }
