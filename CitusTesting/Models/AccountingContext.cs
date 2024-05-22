@@ -13,7 +13,7 @@ namespace CitusTesting.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql(Configuration.GetConnectionString("accounting_single_node"));
+            optionsBuilder.UseNpgsql(Configuration.GetConnectionString("accounting_multi"));
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -31,6 +31,8 @@ namespace CitusTesting.Models
         }
 
         public DbSet<Account> Accounts { get; set; }
+        public DbSet<Entry> Entries { get; set; }
         public DbSet<Facility> Facilities { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
     }
 }
