@@ -1,13 +1,15 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using CitusTesting.Entities;
+using Microsoft.EntityFrameworkCore;
 using Npgsql.NameTranslation;
 
-namespace CitusTesting.Models
+namespace CitusTesting.DbContexts
 {
     public class AccountingContext : DbContext
     {
         private IConfiguration Configuration;
-        
-        public AccountingContext (IConfiguration configuration){
+
+        public AccountingContext(IConfiguration configuration)
+        {
             Configuration = configuration;
         }
 

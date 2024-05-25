@@ -1,4 +1,4 @@
-﻿using CitusTesting.Models;
+﻿using CitusTesting.DbContexts;
 
 namespace CitusTesting.Seeders
 {

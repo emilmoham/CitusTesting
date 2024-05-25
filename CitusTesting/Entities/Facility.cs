@@ -1,4 +1,4 @@
-﻿namespace CitusTesting.Models
+﻿namespace CitusTesting.Entities
 {
     public class Facility
     {

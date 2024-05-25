@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CitusTesting.Models
+namespace CitusTesting.Entities
 {
     public class Account
     {
