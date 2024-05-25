@@ -20,7 +20,7 @@ namespace CitusTesting
             {
                 new FacilitiesSeeder(),
                 new AccountsSeeder(),
-                new TransactionSeeder(10000)
+                new TransactionSeeder(100)
             };
 
             Stopwatch stopwatch = new Stopwatch();
