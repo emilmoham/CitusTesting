@@ -1,6 +1,6 @@
 using CitusTesting.DbContexts;
-using CitusTesting.Seeders;
-using System.Diagnostics;
+using CitusTesting.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace CitusTesting
 {
@@ -8,37 +8,29 @@ namespace CitusTesting
     {
         public static void Main(string[] args)
         {
-            var builder = new ConfigurationBuilder();
-            builder.SetBasePath(Directory.GetCurrentDirectory())
-                   .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+            var builder = WebApplication.CreateBuilder(args);
 
-            IConfiguration config = builder.Build();
+            builder.Services.AddControllers();
 
-            AccountingContext context = new AccountingContext(config);
-
-            IDatabaseSeeder[] seeders = new IDatabaseSeeder[]
+            builder.Services.AddDbContext<AccountingContext>(options =>
             {
-                new FacilitiesSeeder(),
-                new AccountsSeeder(),
-                new TransactionSeeder(100)
-            };
+                options.UseSqlServer(builder.Configuration.GetConnectionString("accounting_mssql"));
+            });
 
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
-            foreach (IDatabaseSeeder seeder in seeders)
-            {
-                seeder.Seed(context);
-            }
-            stopwatch.Stop();
+            builder.Services.AddScoped<IFacilitiesRepository, FacilitiesRepository>();
+            builder.Services.AddScoped<IAccountsRepository, AccountsRepository>();
+            builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
+            builder.Services.AddScoped<IEntriesRepository, EntriesRepository>();
 
-            Console.WriteLine($"Seeding finished -- {stopwatch.Elapsed}");
+            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-            //List<Account> accounts = context.Accounts.ToList();
+            var app = builder.Build();
 
-            //foreach (Account account in accounts)
-            //{
-            //    Console.WriteLine($"{account.Id} - {account.Name} - {account.Number} - {(account.Type ? "Credit Normal" : "Debit Normal")} - {account.FacilityId}");
-            //}
+            //app.UseAuthorization();
+
+            app.MapControllers();
+
+            app.Run();
         }
     }
 }

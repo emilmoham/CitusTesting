@@ -3,11 +3,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CitusTesting.Services
 {
-    public class EntryRepository : IEntriesRepository
+    public class EntriesRepository : IEntriesRepository
     {
         private AccountingContext _context;
 
-        public EntryRepository(AccountingContext context)
+        public EntriesRepository(AccountingContext context)
         {
             _context = context;
         }

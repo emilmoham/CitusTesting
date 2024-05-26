@@ -1,6 +1,5 @@
 ﻿using CitusTesting.DbContexts;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query.Internal;
 
 namespace CitusTesting.Services
 {
