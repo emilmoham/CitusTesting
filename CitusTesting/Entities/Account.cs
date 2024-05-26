@@ -1,7 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace CitusTesting.Entities
+﻿namespace CitusTesting.Entities
 {
     public class Account
     {
@@ -14,5 +11,13 @@ namespace CitusTesting.Entities
         public bool Type { get; set; }
 
         public int FacilityId { get; set; }
+
+        public Account(string name, int number, bool type, int facilityId)
+        {
+            Name = name;
+            Number = number;
+            Type = type;
+            FacilityId = facilityId;
+        }
     }
 }

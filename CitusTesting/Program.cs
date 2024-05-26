@@ -19,7 +19,7 @@ namespace CitusTesting
 
             builder.Services.AddScoped<IFacilitiesRepository, FacilitiesRepository>();
             builder.Services.AddScoped<IAccountsRepository, AccountsRepository>();
-            builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
+            builder.Services.AddScoped<ITransactionsRepository, TransactionRepository>();
             builder.Services.AddScoped<IEntriesRepository, EntriesRepository>();
 
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

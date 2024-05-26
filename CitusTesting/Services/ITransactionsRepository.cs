@@ -1,6 +1,6 @@
 ﻿namespace CitusTesting.Services
 {
-    public interface ITransactionRepository
+    public interface ITransactionsRepository
     {
         Task<IEnumerable<Entities.Transaction>> GetTransactionsAsync(int? facilityId);
         IAsyncEnumerable<Entities.Transaction> GetTransactionsAsAsyncEnumerable(int? facilityId);

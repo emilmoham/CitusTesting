@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CitusTesting.Services
 {
-    public class TransactionRepository : ITransactionRepository
+    public class TransactionRepository : ITransactionsRepository
     {
         private AccountingContext _context;
 
