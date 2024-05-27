@@ -14,7 +14,8 @@ namespace CitusTesting
 
             builder.Services.AddDbContext<AccountingContext>(options =>
             {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("accounting_mssql"));
+                //options.UseSqlServer(builder.Configuration.GetConnectionString("accounting_mssql"));
+                options.UseNpgsql(builder.Configuration.GetConnectionString("accounting_multi"));
             });
 
             builder.Services.AddScoped<IFacilitiesRepository, FacilitiesRepository>();
