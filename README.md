@@ -13,9 +13,17 @@ Instructions for setting up the databases:
 ### K6
 For load testing, install [k6](https://k6.io/) according to the instructions 
 found [here](https://grafana.com/docs/k6/latest/set-up/install-k6/).
+For load testing, install [k6](https://k6.io/) according to the instructions 
+found [here](https://grafana.com/docs/k6/latest/set-up/install-k6/).
 
 ## Tests and Results
 ### AsyncAPI Load Test
+* This test measusres how many insert requests can be handled over a 60 second
+  period.
+* Running this test:
+  * Run the AsyncAPI project in the CitusTesting solution. Choose the
+    configuration that matches the running backend.
+  * Run the load test script with `k6 run src\k6\api-test.js`
 * This test measusres how many insert requests can be handled over a 60 second
   period.
 * Running this test:
