@@ -1,0 +1,13 @@
+version: "3.9"
+services:
+  postgresql:
+    container_name: citus_testing_postgresql
+    image: postgres:16-alpine
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./db/PostgreSQL:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: accounting
+      POSTGRES_USER: citus_testing
+      POSTGRES_PASSWORD: citus_testing
