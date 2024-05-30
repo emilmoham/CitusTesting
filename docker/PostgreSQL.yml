@@ -1,7 +1,8 @@
 version: "3.9"
+name: citus_testing_postgresql
 services:
   postgresql:
-    container_name: citus_testing_postgresql
+    container_name: postgresql
     image: postgres:16-alpine
     ports:
       - '5432:5432'
@@ -11,3 +12,5 @@ services:
       POSTGRES_DB: accounting
       POSTGRES_USER: citus_testing
       POSTGRES_PASSWORD: citus_testing
+    cpus: 2
+    mem_limit: 1024m
