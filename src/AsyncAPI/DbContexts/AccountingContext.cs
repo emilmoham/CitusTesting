@@ -13,6 +13,7 @@ namespace AsyncAPI.DbContexts
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+#if CITUS || POSTGRESQL
             var mapper = new NpgsqlSnakeCaseNameTranslator();
             var types = modelBuilder.Model.GetEntityTypes().ToList();
 
@@ -23,6 +24,7 @@ namespace AsyncAPI.DbContexts
             types.SelectMany(e => e.GetProperties())
                .ToList()
                .ForEach(p => p.SetColumnName(mapper.TranslateMemberName(p.GetColumnBaseName())));
+#endif
         }
 
         public DbSet<Account> Accounts { get; set; }
