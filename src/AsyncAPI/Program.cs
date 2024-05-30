@@ -19,7 +19,7 @@ namespace AsyncAPI
 #elif MSSQL
                 options.UseSqlServer(builder.Configuration.GetConnectionString("accounting_mssql"));
 #elif POSTGRESQL
-                options.UseSqlServer(builder.Configuration.GetConnectionString("accounting_single"));
+                options.UseNpgsql(builder.Configuration.GetConnectionString("accounting_single"));
 #endif
 
             });
