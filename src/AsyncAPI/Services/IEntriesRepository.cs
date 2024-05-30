@@ -1,4 +1,4 @@
-﻿namespace CitusTesting.Services
+﻿namespace AsyncAPI.Services
 {
     public interface IEntriesRepository
     {

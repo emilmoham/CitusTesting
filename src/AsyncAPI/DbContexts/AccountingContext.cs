@@ -1,8 +1,8 @@
-﻿using CitusTesting.Entities;
+﻿using AsyncAPI.Entities;
 using Microsoft.EntityFrameworkCore;
 using Npgsql.NameTranslation;
 
-namespace CitusTesting.DbContexts
+namespace AsyncAPI.DbContexts
 {
     public class AccountingContext : DbContext
     {

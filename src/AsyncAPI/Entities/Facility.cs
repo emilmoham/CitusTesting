@@ -1,4 +1,4 @@
-﻿namespace CitusTesting.Entities
+﻿namespace AsyncAPI.Entities
 {
     public class Facility
     {

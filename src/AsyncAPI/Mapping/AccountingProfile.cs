@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using CitusTesting.Models;
+using AsyncAPI.Models;
 
-namespace CitusTesting.Mapping
+namespace AsyncAPI.Mapping
 {
     public class AccountingProfiles : Profile
     {

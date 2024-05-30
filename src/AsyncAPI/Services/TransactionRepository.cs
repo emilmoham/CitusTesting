@@ -1,7 +1,7 @@
-﻿using CitusTesting.DbContexts;
+﻿using AsyncAPI.DbContexts;
 using Microsoft.EntityFrameworkCore;
 
-namespace CitusTesting.Services
+namespace AsyncAPI.Services
 {
     public class TransactionRepository : ITransactionsRepository
     {

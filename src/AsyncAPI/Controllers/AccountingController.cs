@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using CitusTesting.Models;
-using CitusTesting.Services;
+using AsyncAPI.Models;
+using AsyncAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CitusTesting.Controllers
+namespace AsyncAPI.Controllers
 {
     [Route("api")]
     [ApiController]

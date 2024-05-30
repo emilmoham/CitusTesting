@@ -1,4 +1,4 @@
-﻿namespace CitusTesting.Models
+﻿namespace AsyncAPI.Models
 {
     public class CreateFacilityDto
     {

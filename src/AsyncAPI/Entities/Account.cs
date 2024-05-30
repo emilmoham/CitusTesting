@@ -1,7 +1,9 @@
-﻿namespace CitusTesting.Models
+﻿namespace AsyncAPI.Entities
 {
-    public class CreateAccountDto
+    public class Account
     {
+        public int Id { get; set; }
+
         public string Name { get; set; }
 
         public int Number { get; set; }
@@ -10,7 +12,7 @@
 
         public int FacilityId { get; set; }
 
-        public CreateAccountDto(string name, int number, bool type, int facilityId)
+        public Account(string name, int number, bool type, int facilityId)
         {
             Name = name;
             Number = number;

@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "CitusTesting": {
+    "AsyncAPI": {
       "commandName": "Project",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

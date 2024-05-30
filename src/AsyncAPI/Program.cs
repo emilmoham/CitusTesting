@@ -1,8 +1,8 @@
-using CitusTesting.DbContexts;
-using CitusTesting.Services;
+using AsyncAPI.DbContexts;
+using AsyncAPI.Services;
 using Microsoft.EntityFrameworkCore;
 
-namespace CitusTesting
+namespace AsyncAPI
 {
     public class Program
     {
@@ -14,13 +14,8 @@ namespace CitusTesting
 
             builder.Services.AddDbContext<AccountingContext>(options =>
             {
-#if CITUS
+                //options.UseSqlServer(builder.Configuration.GetConnectionString("accounting_mssql"));
                 options.UseNpgsql(builder.Configuration.GetConnectionString("accounting_multi"));
-#elif MSSQL
-                options.UseSqlServer(builder.Configuration.GetConnectionString("accounting_mssql"));
-#elif POSTGRESQL
-                options.UseNpgsql(builder.Configuration.GetConnectionString("accounting_single"));
-#endif
             });
 
             builder.Services.AddScoped<IFacilitiesRepository, FacilitiesRepository>();
