@@ -5,7 +5,7 @@ import { randomIntBetween  } from 'https://jslib.k6.io/k6-utils/1.2.0/index.js';
 export const options = {
     insecureSkipTLSVerify: true,
     noConnectionReuse: false,
-    vus: 1,
+    vus: 10,
     duration: '60s'
 };
 

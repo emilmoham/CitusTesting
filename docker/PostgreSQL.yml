@@ -1,4 +1,4 @@
-version: "3.9"
+version: '3.9'
 name: citus_testing_postgresql
 services:
   postgresql:
@@ -13,4 +13,8 @@ services:
       POSTGRES_USER: citus_testing
       POSTGRES_PASSWORD: citus_testing
     cpus: 2
-    mem_limit: 1024m
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 1024m
