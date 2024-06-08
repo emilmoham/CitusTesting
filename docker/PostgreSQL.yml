@@ -1,4 +1,3 @@
-version: '3.9'
 name: citus_testing_postgresql
 services:
   postgresql:
@@ -12,9 +11,8 @@ services:
       POSTGRES_DB: accounting
       POSTGRES_USER: citus_testing
       POSTGRES_PASSWORD: citus_testing
-    cpus: 2
     deploy:
       resources:
         limits:
-          cpus: '2'
-          memory: 1024m
+          cpus: '0.25'
+          memory: 2048m

@@ -17,7 +17,7 @@ CREATE TABLE accounting.dbo.transactions (
 );
 
 CREATE TABLE accounting.dbo.entries (
-	Id bigint IDENTITY(1,1),
+	Id bigint IDENTITY(1,1) PRIMARY KEY,
 	FacilityId int NOT NULL REFERENCES accounting.dbo.facilities(id),
 	TransactionId bigint NOT NULL REFERENCES accounting.dbo.transactions(id),
 	AccountId int NOT NULL REFERENCES accounting.dbo.accounts(id),

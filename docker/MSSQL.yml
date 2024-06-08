@@ -1,0 +1,22 @@
+name: citus_testing_mssql
+services:
+  mssql:
+    container_name: mssql
+    image: mcr.microsoft.com/mssql/server:2017-latest
+    hostname: CR-MSSQL
+    expose:
+      - '1433'
+    ports:
+      - '1433:1433'
+    volumes:
+      - ./db/MSSQL/data:/var/opt/mssql/data
+      - ./db/MSSQL/log:/var/opt/mssql/log
+      - ./db/MSSQL/secrets:/var/opt/mssql/secrets
+    environment:
+      ACCEPT_EULA: Y
+      MSSQL_SA_PASSWORD: MSSQL_testing$1
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 2048m
