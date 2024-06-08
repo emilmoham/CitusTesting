@@ -1,0 +1,27 @@
+receivers:
+  otlp:
+    protocols:
+      grpc:
+      http:
+  docker_stats:
+    endpoint: //./pipe/docker_engine
+    collection_interval: 30s
+    timeout: 10s
+    api_version: 1.24
+    metrics:
+      container.cpu.utilization:
+        enabled: true
+      container.memory.percent:
+        enabled: true
+processors:
+  batch:
+    send_batch_size: 1000
+    timeout: 10s
+  resourcedetection:
+    detectors: [env, system]
+    timeout: 2s
+    system:
+      hostname_sources: [os]
+exporters:
+  otlp:
+    endpoint: "ingest.{region}.signoz.cloud:443"
