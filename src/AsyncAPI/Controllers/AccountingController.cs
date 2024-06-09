@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
-using AsyncAPI.Models;
+using AsyncAPI.Models.DTOs;
+using AsyncAPI.Models.Args;
 using AsyncAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -29,7 +30,7 @@ namespace AsyncAPI.Controllers
             _entriesRepository = entriesRepository;
             _mapper = mapper;
         }
-
+        
         [HttpGet("facilities/{id}", Name = "GetFacility")]
         public async Task<IActionResult> GetFacility(int id)
         {
@@ -42,7 +43,7 @@ namespace AsyncAPI.Controllers
         }
 
         [HttpPost("facilities")]
-        public async Task<IActionResult> CreateFacility([FromBody] CreateFacilityDto facilityForCreation)
+        public async Task<IActionResult> CreateFacility([FromBody] CreateFacility facilityForCreation)
         {
             Entities.Facility facilityEntity = _mapper.Map<Entities.Facility>(facilityForCreation);
 
@@ -50,76 +51,33 @@ namespace AsyncAPI.Controllers
             if (await _facilitiesRepository.SaveChangesAsync() == false)
                 return StatusCode(500, "Facility could not be created");
 
+
+            Entities.Account[] facilityAccounts = new Entities.Account[] {
+                new Entities.Account("Assets", 1000, false, facilityEntity.Id, 1000),
+                new Entities.Account("Liabilities", 2000, false, facilityEntity.Id, 500),
+                new Entities.Account("Equity", 3000, false, facilityEntity.Id, 10000),
+                new Entities.Account("Revenue", 4000, false, facilityEntity.Id, 0),
+                new Entities.Account("Expenses", 5000, false, facilityEntity.Id, 0)
+            };
+            
+            _accountsRepository.AddAccounts(facilityAccounts);
+            if (await _accountsRepository.SaveChangesAsync() == false)
+                return StatusCode(500, "Accounts could not be created for facility");
+
             return CreatedAtRoute("GetFacility", new { id = facilityEntity.Id }, facilityEntity);
         }
 
-        [HttpGet("accounts/{id}", Name = "GetAccount")]
-        public async Task<IActionResult> GetAccount(int id)
-        {
-            Entities.Account? entity = await _accountsRepository.GetAccountAsync(id);
+        [HttpGet("facilities/{id}/balances")]
+        public async Task<IActionResult> GetBalances(int id) {
+            IEnumerable<Entities.Account> facilityAccounts = await _accountsRepository.GetAccountsAsync(id);
+            
+            if (!facilityAccounts.Any()) return NotFound();
 
-            if (entity == null)
-                return NotFound();
+            IEnumerable<Account> accounts = facilityAccounts.Select(a => new Account(a.Name, a.Number, a.Balance));
 
-            return Ok(entity);
-        }
+            BalanceSheet balanceSheet = new BalanceSheet(accounts);
 
-        [HttpPost("accounts")]
-        public async Task<IActionResult> CreateAccount([FromBody] CreateAccountDto accountForCreation)
-        {
-            Entities.Account accountEntity = _mapper.Map<Entities.Account>(accountForCreation);
-
-            _accountsRepository.AddAccount(accountEntity);
-            if (await _facilitiesRepository.SaveChangesAsync() == false)
-                return StatusCode(500, "Account could not be created");
-
-            return CreatedAtRoute("GetAccount", new { id = accountEntity.Id }, accountEntity);
-        }
-
-        [HttpGet("transactions/{id}", Name = "GetTransaction")]
-        public async Task<IActionResult> Gettransaction(int id)
-        {
-            Entities.Transaction? entity = await _transactionsRepository.GetTransactionAsync(id);
-
-            if (entity == null)
-                return NotFound();
-
-            return Ok(entity);
-        }
-
-        [HttpPost("transactions")]
-        public async Task<IActionResult> CreateTransaction([FromBody] CreateTransactionDto transactionForCreation)
-        {
-            Entities.Transaction transactionEntity = _mapper.Map<Entities.Transaction>(transactionForCreation);
-
-            _transactionsRepository.AddTransaction(transactionEntity);
-            if (await _facilitiesRepository.SaveChangesAsync() == false)
-                return StatusCode(500, "Transaction could not be created");
-
-            return CreatedAtRoute("GetTransaction", new { id = transactionEntity.Id }, transactionEntity);
-        }
-
-        [HttpGet("entries/{id}", Name = "GetEntries")]
-        public async Task<IActionResult> GetEntries(int id)
-        {
-            Entities.Entry? entity = await _entriesRepository.GetEntryAsync(id);
-
-            if (entity == null)
-                return NotFound();
-
-            return Ok(entity);
-        }
-
-        [HttpPost("entries")]
-        public async Task<IActionResult> CreateEntry([FromBody] CreateEntryDto entryForCreation)
-        {
-            Entities.Entry entryEntity = _mapper.Map<Entities.Entry>(entryForCreation);
-
-            _entriesRepository.AddEntry(entryEntity);
-            if (await _facilitiesRepository.SaveChangesAsync() == false)
-                return StatusCode(500, "Entry could not be created");
-
-            return CreatedAtRoute("GetFacility", new { id = entryEntity.Id }, entryEntity);
+            return Ok(balanceSheet);
         }
     }
 }
