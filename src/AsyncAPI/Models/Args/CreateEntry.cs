@@ -1,6 +1,6 @@
-﻿namespace AsyncAPI.Models
+﻿namespace AsyncAPI.Models.Args
 {
-    public class CreateEntryDto
+    public class CreateEntry
     {
         public int FacilityId { get; set; }
         public long TransactionId { get; set; }
@@ -8,7 +8,7 @@
         public int Credit { get; set; }
         public int Debit { get; set; }
 
-        public CreateEntryDto(int facilityId, long transactionId, int accountId, int credit, int debit)
+        public CreateEntry(int facilityId, long transactionId, int accountId, int credit, int debit)
         {
             FacilityId = facilityId;
             TransactionId = transactionId;
