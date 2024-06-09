@@ -11,6 +11,10 @@
 
         void AddAccounts(Entities.Account[] accountToAdd);
 
+        void UpdateAccount(Entities.Account accountToUpdate);
+
+        void UpdateAccounts(Entities.Account[] accountsToUpdate);
+
         Task<bool> SaveChangesAsync();
     }
 }

@@ -42,6 +42,20 @@ namespace AsyncAPI.Services
             return await _context.Accounts.FirstOrDefaultAsync(a => a.Id == id);
         }
 
+        public void UpdateAccount(Entities.Account accountToUpdate)
+        {
+            if (accountToUpdate == null) throw new ArgumentNullException(nameof(accountToUpdate));
+
+            _context.Accounts.Update(accountToUpdate);
+        }
+
+        public void UpdateAccounts(Entities.Account[] accountsToUpdate)
+        {
+            if (accountsToUpdate == null || !accountsToUpdate.Any()) throw new ArgumentNullException(nameof(accountsToUpdate));
+
+            _context.Accounts.UpdateRange(accountsToUpdate);
+        }
+
         public async Task<bool> SaveChangesAsync()
         {
             return (await _context.SaveChangesAsync() > 0);

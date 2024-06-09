@@ -9,6 +9,8 @@
 
         void AddEntry(Entities.Entry entryToAdd);
 
+        void AddEntries(Entities.Entry[] entriesToAdd);
+
         Task<bool> SaveChangesAsync();
     }
 }

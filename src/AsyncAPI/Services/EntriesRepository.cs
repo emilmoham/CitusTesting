@@ -19,6 +19,13 @@ namespace AsyncAPI.Services
             _context.Entries.Add(EntryToAdd);
         }
 
+        public void AddEntries(Entities.Entry[] entriesToAdd)
+        {
+            if (entriesToAdd == null || entriesToAdd.Length == 0) throw new ArgumentNullException(nameof(entriesToAdd));
+
+            _context.Entries.AddRange(entriesToAdd);
+        }
+
         public async Task<IEnumerable<Entities.Entry>> GetEntriesAsync(int? facilityId)
         {
             if (facilityId != null)
