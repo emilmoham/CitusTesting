@@ -9,6 +9,7 @@ create table accounts (
 	number int NOT NULL,
 	type boolean NOT NULL,
 	facility_id int NOT NULL REFERENCES facilities(id),
+	balance int NOT NULL,
 	PRIMARY KEY (facility_id, id)						-- Added composite PRIMARY KEY
 );
 

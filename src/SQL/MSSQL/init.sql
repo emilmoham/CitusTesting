@@ -8,7 +8,8 @@ CREATE TABLE accounting.dbo.accounts (
 	Name varchar(50) NOT NULL,
 	Number int NOT NULL,
 	Type bit NOT NULL,
-	FacilityId int NOT NULL REFERENCES accounting.dbo.facilities(id)
+	FacilityId int NOT NULL REFERENCES accounting.dbo.facilities(id),
+	Balance int NOT NULL
 );
 
 CREATE TABLE accounting.dbo.transactions (

@@ -12,12 +12,15 @@
 
         public int FacilityId { get; set; }
 
-        public Account(string name, int number, bool type, int facilityId)
+        public int Balance { get; set; }
+
+        public Account(string name, int number, bool type, int facilityId, int balance)
         {
             Name = name;
             Number = number;
             Type = type;
             FacilityId = facilityId;
+            Balance = balance;
         }
     }
 }

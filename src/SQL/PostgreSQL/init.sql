@@ -8,7 +8,8 @@ CREATE TABLE accounts (
 	name text NOT NULL,
 	number int NOT NULL,
 	TYPE boolean NOT NULL,
-	facility_id int NOT NULL REFERENCES facilities(id)
+	facility_id int NOT NULL REFERENCES facilities(id),
+	balance int NOT NULL
 );
 
 CREATE TABLE transactions (

@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using AsyncAPI.Models;
+using AsyncAPI.Models.Args;
 
 namespace AsyncAPI.Mapping
 {
@@ -7,25 +7,26 @@ namespace AsyncAPI.Mapping
     {
         public AccountingProfiles()
         {
-            CreateMap<CreateFacilityDto, Entities.Facility>()
+            CreateMap<CreateFacility, Entities.Facility>()
                 .ConstructUsing(src => new Entities.Facility(
                         src.Name
                     ));
             
-            CreateMap<CreateAccountDto, Entities.Account>()
+            CreateMap<CreateAccount, Entities.Account>()
                 .ConstructUsing(src => new Entities.Account(
                         src.Name,
                         src.Number,
                         src.Type,
-                        src.FacilityId
+                        src.FacilityId,
+                        src.Balance
                     ));
             
-            CreateMap<CreateTransactionDto, Entities.Transaction>()
+            CreateMap<CreateTransaction, Entities.Transaction>()
                 .ConstructUsing(src => new Entities.Transaction(
                         src.FacilityId
                     ));
 
-            CreateMap<CreateEntryDto, Entities.Entry>()
+            CreateMap<CreateEntry, Entities.Entry>()
                 .ConstructUsing(src => new Entities.Entry(
                         src.FacilityId,
                         src.TransactionId,
