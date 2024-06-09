@@ -19,8 +19,16 @@ namespace AsyncAPI.Services
             _context.Add(accountToAdd);
         }
 
-        public async Task<IEnumerable<Entities.Account>> GetAccountsAsync()
+        public void AddAccounts(Entities.Account[] accountsToAdd) {
+            if (accountsToAdd == null || accountsToAdd.Length == 0) throw new ArgumentNullException(nameof(accountsToAdd));
+
+            _context.AddRange(accountsToAdd);
+        }
+
+        public async Task<IEnumerable<Entities.Account>> GetAccountsAsync(int? id = null)
         {
+            if (id != null)
+                return await _context.Accounts.Where(a => a.FacilityId == id).ToListAsync();
             return await _context.Accounts.ToListAsync();
         }
 

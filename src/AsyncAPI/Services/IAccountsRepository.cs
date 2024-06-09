@@ -2,12 +2,14 @@
 {
     public interface IAccountsRepository
     {
-        Task<IEnumerable<Entities.Account>> GetAccountsAsync();
+        Task<IEnumerable<Entities.Account>> GetAccountsAsync(int? id = null);
         IAsyncEnumerable<Entities.Account> GetAccountsAsAsyncEnumerable();
 
         Task<Entities.Account?> GetAccountAsync(int id);
 
         void AddAccount(Entities.Account accountToAdd);
+
+        void AddAccounts(Entities.Account[] accountToAdd);
 
         Task<bool> SaveChangesAsync();
     }
