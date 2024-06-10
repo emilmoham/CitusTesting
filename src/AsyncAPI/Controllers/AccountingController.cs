@@ -43,6 +43,12 @@ namespace AsyncAPI.Controllers
             return Ok(entity);
         }
 
+        [HttpGet("facilities")]
+        public async Task<IActionResult> GetFacilitesCount()
+        {
+            return Ok(await _facilitiesRepository.GetFacilitiesCountAsync());
+        }
+
         [HttpPost("facilities")]
         public async Task<IActionResult> CreateFacility([FromBody] CreateFacility facilityForCreation)
         {

@@ -34,6 +34,11 @@ namespace AsyncAPI.Services
             return await _context.Facilities.FirstOrDefaultAsync(f => f.Id == id);
         }
 
+        public async Task<int> GetFacilitiesCountAsync()
+        {
+            return await _context.Facilities.CountAsync();
+        }
+
         public async Task<bool> SaveChangesAsync()
         {
             return (await _context.SaveChangesAsync() > 0);
